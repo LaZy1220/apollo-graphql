@@ -1,11 +1,11 @@
 import {gql} from '@apollo/client'
 
-export const GET_PRODUCT = gql`
-    query getProduct{
-  category(input:{title:"all"}){
-    products{
-      name
-    }
+export const GET_PRODUCTS = gql`
+query getProducts($title:String!){
+ 	category(input:{title:$title}){
+   products{
+    name
+  } 
   }
 }
 `
