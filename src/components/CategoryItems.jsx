@@ -7,7 +7,7 @@ export const CategoryItems=({
 })=>{
     const {data,loading}=useQuery(GET_CATEGORIES)
     if(loading){
-        return <h2>Loading...</h2>
+        return ''
     }
     return(
         <>

@@ -1,9 +1,9 @@
 import {gql} from '@apollo/client'
 
 export const GET_CURRENCIES = gql`
-   query getCurrencies{
+     query getCurrencies{
         currencies{
-		label
+		label symbol
         }
     }
 `

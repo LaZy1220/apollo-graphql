@@ -4,7 +4,7 @@ export const GET_PRODUCTS = gql`
 query getProducts($title:String!){
  	category(input:{title:$title}){
    products{
-    name
+    name id gallery prices{currency{symbol}amount}
   } 
   }
 }

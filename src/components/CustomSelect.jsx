@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "@apollo/client/react";
-import { useState } from "react";
 import { GET_CURRENCIES } from "../query/currencies"
-
 const CustomSelectEl = styled.div`
     cursor: pointer;
     height: 20px;
@@ -30,13 +28,6 @@ const CurrencySymbol = styled.span`
     left:20px;
 `
 
-
-const formatter = (label)=>{
-    const value = '0'
-    let curSym = new Intl.NumberFormat("ru",{style:"currency",currency:`${label}`}).format(value)
-    return curSym.substr(curSym.length-1)
-}
-
 export const CustomSelect=({ 
     setCurrentCurrency,
     currentCurrency,
@@ -47,16 +38,17 @@ export const CustomSelect=({
         }
     return(
         <>
-                <CustomSelectEl id="select">
-                    {formatter(currentCurrency)}
-                    <IconSelect src='images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/>
+                <CustomSelectEl title="select">
+                    {currentCurrency.symbol}
+                    <IconSelect title="select" src='images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/>
                 </CustomSelectEl>
-                {isHide&&
+                {isHide?
                 <Options>
                     {data.currencies.map(cur=>(
-                        <Currency onClick={()=>setCurrentCurrency(cur.label)} key={cur.label}><CurrencySymbol>{formatter(cur.label)}</CurrencySymbol>{cur.label}</Currency>
+                        <Currency onClick={()=>setCurrentCurrency({label:cur.label,symbol:cur.symbol})} key={cur.label}><CurrencySymbol>{cur.symbol}</CurrencySymbol>{cur.label}</Currency>
                     ))}
-                </Options>}
+                </Options>
+                :''}
         </>
     )
 }

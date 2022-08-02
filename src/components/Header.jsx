@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Conteinter } from "./Conteiner";
 import { CategoryItems } from "./CategoryItems";
 import { CustomSelect } from "./CustomSelect";
 
@@ -42,7 +41,6 @@ export const Header = ({
     })=>{
     return(
         <HeaderEl>
-            <Conteinter>
                 <Wrapper>
                     <CategoriesList>
                         <CategoryItems
@@ -60,7 +58,6 @@ export const Header = ({
                         <Cart src="/images/Cart.svg"/>
                     </Select>
                 </Wrapper>
-            </Conteinter>
         </HeaderEl>
     )
 }
