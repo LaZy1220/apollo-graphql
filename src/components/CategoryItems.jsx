@@ -1,5 +1,11 @@
 import { GET_CATEGORIES} from "../query/categories";
 import { useQuery } from "@apollo/client/react";
+import styled from "styled-components";
+
+const Category = styled.li`
+    padding:0 16px 30px 16px;
+    cursor:pointer;
+`
 
 export const CategoryItems=({
     currentCategory,
@@ -13,13 +19,12 @@ export const CategoryItems=({
         <>
         {
             data.categories.map(cat=>(
-                <li 
+                <Category 
                 className={currentCategory===cat.name?'active':''} 
                 onClick={()=>handleSwitchCategory(cat.name)}
-                key={cat.name} 
-                style={{padding:'0 16px 30px 16px',cursor:'pointer'}}>
+                key={cat.name}>
                 {(cat.name).toUpperCase()}
-            </li>))
+            </Category>))
         }       
         </>
     )

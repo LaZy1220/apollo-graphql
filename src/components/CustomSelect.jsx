@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { useQuery } from "@apollo/client/react";
 import { GET_CURRENCIES } from "../query/currencies"
+
 const CustomSelectEl = styled.div`
+    font-weight:var(--fw-hard);
+    font-size: 18px;
+`
+const SelectEl = styled.div`
     cursor: pointer;
     height: 20px;
 ` 
@@ -15,7 +20,7 @@ const Options = styled.ul`
     list-style:none;
     box-sizing: border-box;
     top:65px;
-    right:108px;
+    right:78px;
     box-shadow: 0px 0px 38px -2px rgba(34, 60, 80, 0.06);
 `
 const Currency = styled.li`
@@ -25,7 +30,7 @@ const Currency = styled.li`
 `
 const CurrencySymbol = styled.span`
     position: absolute;
-    left:20px;
+    left:18px;
 `
 
 export const CustomSelect=({ 
@@ -37,11 +42,11 @@ export const CustomSelect=({
             return ''
         }
     return(
-        <>
-                <CustomSelectEl title="select">
+        <CustomSelectEl>
+                <SelectEl title="select">
                     {currentCurrency.symbol}
                     <IconSelect title="select" src='images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/>
-                </CustomSelectEl>
+                </SelectEl>
                 {isHide?
                 <Options>
                     {data.currencies.map(cur=>(
@@ -49,6 +54,6 @@ export const CustomSelect=({
                     ))}
                 </Options>
                 :''}
-        </>
+        </CustomSelectEl>
     )
 }
