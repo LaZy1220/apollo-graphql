@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Conteinter } from "./Conteiner";
 import { CategoryItems } from "./CategoryItems";
-import { Form } from "./Form";
+import { CustomSelect } from "./CustomSelect";
 
 const HeaderEl = styled.div`
-    margin-top:28px;
+    padding-top:28px;
 `
 const Wrapper = styled.div`
     display:flex;
@@ -21,6 +21,7 @@ const Cart = styled.img`
     width:20px;
     height:18px;
     cursor: pointer;
+    margin-left:22px;
 `
 const CategoriesList = styled.ul`
 margin: 0;
@@ -30,14 +31,14 @@ display: flex;
 `
 const Select = styled.div`
     display:flex;
-    gap:1;
 `
 
 export const Header = ({
     currentCategory,
     handleSwitchCategory,
-    handleChange,
+    setCurrentCurrency,
     currentCurrency,
+    isHide,
     })=>{
     return(
         <HeaderEl>
@@ -49,11 +50,12 @@ export const Header = ({
                             handleSwitchCategory={handleSwitchCategory}
                         />
                     </CategoriesList>
-                    <Logo src="images/Logo.svg"/>
+                    <Logo src="/images/Logo.svg"/>
                     <Select>
-                        <Form
-                            handleChange={handleChange}
+                        <CustomSelect
+                            setCurrentCurrency={setCurrentCurrency}
                             currentCurrency={currentCurrency}
+                            isHide={isHide}
                         />
                         <Cart src="/images/Cart.svg"/>
                     </Select>

@@ -12,6 +12,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.App {
+  height: 100vh;
+}
 .active {
   color: #5ece7b;
   border-bottom: 1px solid #5ece7b;

@@ -6,29 +6,40 @@ import { GET_PRODUCTS } from "./query/products";
 function App() {
   const [currentCategory,setCurrentCategory]=useState('all')
   const [currentCurrency,setCurrentCurrency]=useState('USD')
+  const [isHide,setIsHide] =useState('true')
   const {data}=useQuery(GET_PRODUCTS,{
     variables:{
       title:currentCategory
     }
   })
+
   const [currentProducts,setCurrentProducts]=useState(data)
+
   const handleSwitchCategory = (name)=>{
     setCurrentCategory(name)  
     setCurrentProducts(data)
   }
-  const handleChange = (e)=>{
-    setCurrentCurrency(e.target.value)
+
+  const showSelect =(event,id)=>{
+    if(event.target.id==='select'){
+      setIsHide(!isHide)
+    }
+    else{
+      setIsHide(false)
+    }
   }
+
   useEffect(()=>{
     setCurrentProducts(data)
   },[data])
     return (
-    <div className="App">
+    <div className="App" onClick={showSelect}>
       <Header 
       currentCategory={currentCategory} 
       handleSwitchCategory={handleSwitchCategory}
-      handleChange={handleChange}
+      setCurrentCurrency={setCurrentCurrency}
       currentCurrency={currentCurrency}
+      isHide={isHide}
       />
     </div>
   );
