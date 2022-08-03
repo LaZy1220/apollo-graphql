@@ -21,7 +21,7 @@ const Options = styled.ul`
     box-sizing: border-box;
     top:65px;
     right:78px;
-    box-shadow: 0px 0px 38px -2px rgba(34, 60, 80, 0.06);
+    box-shadow:var(--shadow);
 `
 const Currency = styled.li`
     padding:20px 40px;
