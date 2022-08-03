@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 import { useQuery } from "@apollo/client"
 import { GET_PRODUCTS } from "../query/products";
 import styled from "styled-components";
+import {useNavigate} from 'react-router-dom'
 
 const GoodsLostEl = styled.div`
   display: grid;
@@ -35,7 +36,8 @@ export const GoodsList = ({
   currentCurrency
 })=>{
   const [currentProducts,setCurrentProducts]=useState([])
-  const {data,loading}=useQuery(GET_PRODUCTS,{
+  const navigate = useNavigate()
+  const {data,loading,error}=useQuery(GET_PRODUCTS,{
     variables:{
       title:currentCategory
     }
@@ -46,10 +48,13 @@ export const GoodsList = ({
     return(
         <GoodsLostEl>
             {
+              error&&<h3>Sorry, we have a problem, try again</h3>
+            }
+            {
                 loading
                 ?<h1>Loading...</h1>
                 :currentProducts?.map(item=>(
-                    <Card key={item.id}>
+                    <Card key={item.id} onClick={()=>navigate(`/product/${item.name}`)}>
                       <CardBody>
                         <GoodsImg src={item.gallery[0]}/>
                         <GoodsTitle>{item.name}</GoodsTitle>

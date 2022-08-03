@@ -1,18 +1,10 @@
 import {useState } from 'react';
+import {Routes,Route} from 'react-router-dom';
 import { Header } from './components/Header';
-import { GoodsList } from './components/GoodsList';
-import {Conteinter} from './components/Conteiner'
-import styled from 'styled-components';
-
-const CategoryTitle = styled.p`
- padding: 0;
- margin: 0;
-  margin-top: 80px;
-  margin-bottom: 60px;
-  font-size: 42px;
-  font-weight:var(-fw-normal);
-`
-const ucFirt = (str) => str[0].toUpperCase()+str.slice(1); 
+import {Conteinter} from './components/Conteiner';
+import { HomePage } from './pages/HomePage';
+import {Cart} from './pages/Cart';
+import {ProductPage} from './pages/ProductPage'
 
 function App() {
   const [currentCategory,setCurrentCategory]=useState('all')
@@ -22,7 +14,6 @@ function App() {
   const handleSwitchCategory = (name)=>{
     setCurrentCategory(name)  
   }
-
   const showSelect =(event)=>{
     if(event.target.title==='select'){
       setIsHide(!isHide)
@@ -41,10 +32,11 @@ function App() {
           currentCurrency={currentCurrency}
           isHide={isHide}
         />
-        <CategoryTitle>{ucFirt(currentCategory)}</CategoryTitle>
-          <GoodsList 
-            currentCategory={currentCategory}
-            currentCurrency={currentCurrency}/>
+        <Routes>
+          <Route path='/' element={<HomePage currentCategory={currentCategory}  currentCurrency={currentCurrency}/>}/>
+          <Route path='/product/:name' element={<ProductPage/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+        </Routes>
       </Conteinter>
     </div>
   );

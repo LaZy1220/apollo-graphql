@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom"
 import { CategoryItems } from "./CategoryItems";
 import { CustomSelect } from "./CustomSelect";
-
+import {useNavigate} from "react-router-dom"
 const HeaderEl = styled.div`
     padding-top:28px;
 `
@@ -39,6 +40,7 @@ export const Header = ({
     currentCurrency,
     isHide,
     })=>{
+        const navigate = useNavigate()
     return(
         <HeaderEl>
                 <Wrapper>
@@ -48,7 +50,7 @@ export const Header = ({
                             handleSwitchCategory={handleSwitchCategory}
                         />
                     </CategoriesList>
-                    <Logo src="/images/Logo.svg"/>
+                    <Logo src="/images/Logo.svg" onClick={()=>navigate('/cart')}/>
                     <Select>
                         <CustomSelect
                             setCurrentCurrency={setCurrentCurrency}
