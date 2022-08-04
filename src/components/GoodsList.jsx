@@ -18,6 +18,9 @@ const Card = styled.div`
 const CardBody = styled.div`
   padding: 16px;
 `
+const ImgWrapper = styled.div`
+  position: relative;
+`
 const GoodsTitle = styled.p`
   font-size:18px;
   font-weight:var(--fw-light);
@@ -29,6 +32,11 @@ const GoodsImg = styled.img`
 `
 const GoodsPrice = styled.span`
   font-weight:var(--fw-hard);
+`
+const OutStockImg = styled.div`
+  background-color: #E5E5E5;
+  width: 100%;
+  height: 338px;
 `
 
 export const GoodsList = ({
@@ -56,7 +64,16 @@ export const GoodsList = ({
                 :currentProducts?.map(item=>(
                     <Card key={item.id} onClick={()=>navigate(`/product/${item.name}`)}>
                       <CardBody>
-                        <GoodsImg src={item.gallery[0]}/>
+                        {
+                          item.inStock
+                          ?<GoodsImg src={item.gallery[0]}/>
+                          :<ImgWrapper>
+                            <GoodsImg style={{position:'absolute',top:'0',opacity:'0.5' }} src={item.gallery[0]}/>
+                            <OutStockImg style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+                              <div>OUT OF STOCK</div>
+                            </OutStockImg>
+                          </ImgWrapper>
+                        }
                         <GoodsTitle>{item.name}</GoodsTitle>
                         {
                           item.prices.map(price=>(
