@@ -62,7 +62,7 @@ export const GoodsList = ({
                 loading
                 ?<h1>Loading...</h1>
                 :currentProducts?.map(item=>(
-                    <Card key={item.id} onClick={()=>navigate(`/product/${item.name}`)}>
+                    <Card key={item.id} onClick={()=>navigate(`/product/${item.id}`)}>
                       <CardBody>
                         {
                           item.inStock
@@ -77,7 +77,7 @@ export const GoodsList = ({
                         <GoodsTitle>{item.name}</GoodsTitle>
                         {
                           item.prices.map(price=>(
-                            price.currency.symbol===currentCurrency.symbol&&<GoodsPrice>{currentCurrency.symbol}{price.amount}</GoodsPrice>
+                            price.currency.symbol===currentCurrency.symbol&&<GoodsPrice key={price.amount}>{currentCurrency.symbol}{price.amount}</GoodsPrice>
                           ))
                         }
                       </CardBody>

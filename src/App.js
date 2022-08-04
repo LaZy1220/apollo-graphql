@@ -34,7 +34,7 @@ function App() {
         />
         <Routes>
           <Route path='/' element={<HomePage currentCategory={currentCategory}  currentCurrency={currentCurrency}/>}/>
-          <Route path='/product/:name' element={<ProductPage/>}/>
+          <Route path='/product/:id' element={<ProductPage/>}/>
           <Route path='/cart' element={<Cart/>}/>
         </Routes>
       </Conteinter>
