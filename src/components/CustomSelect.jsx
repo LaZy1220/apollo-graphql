@@ -45,7 +45,11 @@ export const CustomSelect=({
         <CustomSelectEl>
                 <SelectEl title="select">
                     {currentCurrency.symbol}
-                    <IconSelect title="select" src='images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/>
+                    {
+                       isHide
+                       ?<IconSelect title="select" src='images/icons/Arrow.svg'/>
+                       :<IconSelect title="select" src='images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/> 
+                    }
                 </SelectEl>
                 {isHide?
                 <Options>

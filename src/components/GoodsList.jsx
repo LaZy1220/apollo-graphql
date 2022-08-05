@@ -77,7 +77,8 @@ export const GoodsList = ({
                         <GoodsTitle>{item.name}</GoodsTitle>
                         {
                           item.prices.map(price=>(
-                            price.currency.symbol===currentCurrency.symbol&&<GoodsPrice key={price.amount}>{currentCurrency.symbol}{price.amount}</GoodsPrice>
+                            price.currency.symbol===currentCurrency.symbol
+                            &&<GoodsPrice key={price.amount}><span style={{fontFamily:'var(--raleway)',fontWeight:'var(--fw-hard)'}}>{currentCurrency.symbol}{price.amount}</span></GoodsPrice>
                           ))
                         }
                       </CardBody>

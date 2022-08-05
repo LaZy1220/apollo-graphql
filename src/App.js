@@ -9,6 +9,7 @@ import {ProductPage} from './pages/ProductPage'
 function App() {
   const [currentCategory,setCurrentCategory]=useState('all')
   const [currentCurrency,setCurrentCurrency]=useState({label:'USD',symbol:'$'})
+  const [infoProduct,setInfoProduct]=useState([])
   const [isHide,setIsHide] =useState(false)
 
   const handleSwitchCategory = (name)=>{
@@ -34,7 +35,7 @@ function App() {
         />
         <Routes>
           <Route path='/' element={<HomePage currentCategory={currentCategory}  currentCurrency={currentCurrency}/>}/>
-          <Route path='/product/:id' element={<ProductPage/>}/>
+          <Route path='/product/:id' element={<ProductPage infoProduct={infoProduct} setInfoProduct={setInfoProduct} currentCurrency={currentCurrency}/>}/>
           <Route path='/cart' element={<Cart/>}/>
         </Routes>
       </Conteinter>
