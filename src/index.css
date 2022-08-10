@@ -41,3 +41,19 @@ p {
   top: 151px;
   left: 220px;
 }
+.activeColor {
+  position: relative;
+}
+.activeColor::before {
+  content: "";
+  position: absolute;
+  border: 1px solid #5ece7b;
+  top: -1.5px;
+  right: -1.5px;
+  bottom: -1.5px;
+  left: -1.5px;
+}
+.activeSomeParametrs {
+  background-color: var(--black) !important;
+  color: white !important;
+}

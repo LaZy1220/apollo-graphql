@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import { CategoryItems } from "./CategoryItems";
 import { CustomSelect } from "./CustomSelect";
-import {useNavigate} from "react-router-dom"
+import { Cart } from "./Cart";
 const HeaderEl = styled.div`
     padding-top:28px;
 `
@@ -16,12 +16,6 @@ const Logo = styled.img`
     position: absolute;
     left: 50%;
     cursor: pointer;
-`
-const Cart = styled.img`
-    width:20px;
-    height:18px;
-    cursor: pointer;
-    margin-left:22px;
 `
 const CategoriesList = styled.ul`
 margin: 0;
@@ -50,14 +44,14 @@ export const Header = ({
                             handleSwitchCategory={handleSwitchCategory}
                         />
                     </CategoriesList>
-                    <Logo src="/images/Logo.svg" onClick={()=>navigate('/cart')}/>
+                    <Logo src="/images/Logo.svg"/>
                     <Select>
                         <CustomSelect
                             setCurrentCurrency={setCurrentCurrency}
                             currentCurrency={currentCurrency}
                             isHide={isHide}
                         />
-                        <Cart src="/images/Cart.svg"/>
+                        <Cart onClick={()=>navigate('/cart')}/>
                     </Select>
                 </Wrapper>
         </HeaderEl>

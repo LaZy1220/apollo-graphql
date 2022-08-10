@@ -49,8 +49,15 @@ const AddCartButton = styled.div`
     font-weight: var(--fw-hard);
     cursor: pointer;
 `
-const Price = styled.div``
-const Box = styled.div`
+const ColorBox = styled.div`
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height: 45px;
+    width: 63px;
+    cursor: pointer;
+`
+const BoxAtribute = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
@@ -59,7 +66,6 @@ const Box = styled.div`
     border:1px solid var(--black);
     cursor: pointer;
 `
-
 export const ProductPage = ({
     infoProduct,
     setInfoProduct,
@@ -88,9 +94,9 @@ export const ProductPage = ({
                     <ProductImgs>
                         {
                             infoProduct?.gallery.map((item,index)=>(
-                                <Img key={index} 
-                                src={item} 
-                                id={index} 
+                                <Img 
+                                key={index} 
+                                src={item}  
                                 className={index===currentImg?'activeImg':''}
                                 onClick={()=>handleSwitchImg(index)}/>
                             ))
@@ -104,15 +110,22 @@ export const ProductPage = ({
                                 <span style={{ padding:'24px 0 8px',fontSize:'18px',fontFamily:'var(--roboto)',fontWeight:'var(--fw-bold)',display:'block'}}>{(atr?.name).toUpperCase()}:</span>
                                 <BoxItems>
                                 {
-                                    atr.items.map(item=>(
+                                    atr.items.map((item,index)=>(
                                         atr.id==='Color'
-                                        ?<Box style={{backgroundColor:`${item.value}`,height:'32px',width:'32px'}} key={item.id}/>
-                                        :(<Box 
-                                        key={item.id}>
+                                        ?<ColorBox
+                                            className={index===0?'activeColor':''}
+                                            id={item.id} 
+                                            key={item.id}
+                                            style={{backgroundColor:`${item.value}`,border:`${item.id==='White'?'1px solid var(--black)':'none'}`,height:'32px',width:'32px'}} 
+                                            />                                           
+                                        :(<BoxAtribute
+                                            key={item.id}
+                                            id={item.id}
+                                            className={index===0?'activeSomeParametrs':''}>
                                             <span style={{letterSpacing:'0.05em',fontFamily:'var(--sspro)'}}>
-                                                    <span>{item.value}</span>
+                                                  <span>{item.displayValue}</span>
                                             </span>
-                                    </Box>) 
+                                          </BoxAtribute>) 
                                     ))
                                 }
                                 </BoxItems>
@@ -121,7 +134,7 @@ export const ProductPage = ({
                             {
                         infoProduct?.prices.map(price=>(
                             price.currency.symbol===currentCurrency.symbol
-                            &&<Price key={price.amount}><p style={{fontFamily:'var(--family)',fontWeight:'var(--fw-bold)',fontSize:'24px'}}>{currentCurrency.symbol}{price.amount}</p></Price>
+                            &&<p key={price.amount} style={{fontFamily:'var(--family)',fontWeight:'var(--fw-bold)',fontSize:'24px'}}>{currentCurrency.symbol}{price.amount}</p>
                           ))
                         }
                         <AddCartButton>ADD TO CART</AddCartButton>
