@@ -72,6 +72,7 @@ export const ProductPage = ({
     currentCurrency,
 })=>{ 
     const [currentImg,setCurrentImg] = useState(0)
+    const [chooseAttributes,setChooseAtributes]=useState([])
     const {id}  = useParams()
     const {data,loading,error}=useQuery(GET_INFO_PRODUCTS,{
         variables:{
@@ -80,7 +81,31 @@ export const ProductPage = ({
       })
     const handleSwitchImg=(id)=>{
         setCurrentImg(id)
-    }      
+    }
+    const handleChooseAttribute = (atribute,valueAtribute)=>{
+        const atributeIndex = chooseAttributes.findIndex((itemAtribute)=>{return itemAtribute.label===atribute.name})
+        if(atributeIndex<0){
+            const newAtribute={
+                label:atribute.name,
+                value:valueAtribute.value,
+            }
+            setChooseAtributes([...chooseAttributes,newAtribute])
+        }
+        else{
+            const newValue = chooseAttributes.map((itemAtribute)=>{
+                if(itemAtribute.label===atribute.name){
+                    return{
+                        ...itemAtribute,
+                        value:valueAtribute.value
+                    }
+                }
+                else{
+                    return itemAtribute
+                }
+            })
+            setChooseAtributes(newValue)
+        }
+    }
     useEffect(()=>{
         setInfoProduct(data?.product)
     },[data])
@@ -107,7 +132,7 @@ export const ProductPage = ({
                         <ProductBrend>{infoProduct?.brand}</ProductBrend>
                         {infoProduct?.attributes.map(atr=>
                             (<Parameters key={atr.id}>
-                                <span style={{ padding:'24px 0 8px',fontSize:'18px',fontFamily:'var(--roboto)',fontWeight:'var(--fw-bold)',display:'block'}}>{(atr?.name).toUpperCase()}:</span>
+                                <span style={{padding:'24px 0 8px',fontSize:'18px',fontFamily:'var(--roboto)',fontWeight:'var(--fw-bold)',display:'block'}}>{(atr?.name).toUpperCase()}:</span>
                                 <BoxItems>
                                 {
                                     atr.items.map((item,index)=>(
@@ -116,14 +141,16 @@ export const ProductPage = ({
                                             className={index===0?'activeColor':''}
                                             id={item.id} 
                                             key={item.id}
+                                            onClick={()=>handleChooseAttribute(atr,item)}
                                             style={{backgroundColor:`${item.value}`,border:`${item.id==='White'?'1px solid var(--black)':'none'}`,height:'32px',width:'32px'}} 
                                             />                                           
                                         :(<BoxAtribute
                                             key={item.id}
                                             id={item.id}
+                                            onClick={()=>handleChooseAttribute(atr,item)}
                                             className={index===0?'activeSomeParametrs':''}>
                                             <span style={{letterSpacing:'0.05em',fontFamily:'var(--sspro)'}}>
-                                                  <span>{item.displayValue}</span>
+                                                  <span>{item.value}</span>
                                             </span>
                                           </BoxAtribute>) 
                                     ))
