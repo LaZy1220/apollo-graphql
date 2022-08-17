@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client"
 import { useParams } from "react-router-dom"
 import { GET_INFO_PRODUCTS } from "../query/infoProduct"
 import styled from "styled-components"
+import { Parameters } from "../components/Parameters"
 
 const Details =styled.div`
     display: flex;
@@ -31,11 +32,6 @@ const ProductBrend = styled.div`
     font-size: 30px;
     margin-top: 43px;
 `
-const Parameters = styled.div``
-const BoxItems = styled.div`
-    display:flex;
-    gap:12px;
-`
 const AddCartButton = styled.div`
     margin:20px 0 40px;
     width: 292px;
@@ -47,23 +43,6 @@ const AddCartButton = styled.div`
     align-items:center;
     justify-content: center;
     font-weight: var(--fw-hard);
-    cursor: pointer;
-`
-const ColorBox = styled.div`
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 45px;
-    width: 63px;
-    cursor: pointer;
-`
-const BoxAtribute = styled.div`
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 45px;
-    width: 63px;
-    border:1px solid var(--black);
     cursor: pointer;
 `
 export const ProductPage = ({
@@ -131,44 +110,12 @@ export const ProductPage = ({
                         <ProductTitle>{infoProduct?.name}</ProductTitle>
                         <ProductBrend>{infoProduct?.brand}</ProductBrend>
                         {infoProduct?.attributes.map(atr=>
-                            (<Parameters key={atr.id}>
-                                <span style={{padding:'24px 0 8px',fontSize:'18px',fontFamily:'var(--roboto)',fontWeight:'var(--fw-bold)',display:'block'}}>{(atr?.name).toUpperCase()}:</span>
-                                <BoxItems>
-                                {
-                                    atr.items.map((item)=>(
-                                        atr.id==='Color'
-                                        ?<ColorBox
-                                            className={chooseAttributes.length
-                                                ?chooseAttributes.map(color=>{
-                                                    if(color.value===item.value){
-                                                        return 'activeColor'
-                                                    }
-                                                })
-                                                :''}
-                                            id={item.id} 
-                                            key={item.id}
-                                            onClick={()=>handleChooseAttribute(atr,item)}
-                                            style={{backgroundColor:`${item.value}`,border:`${item.value ==='#FFFFFF'?'1px solid var(--black)':'none'}`,height:'32px',width:'32px'}}
-                                            />                                           
-                                        :(<BoxAtribute
-                                            key={item.id}
-                                            id={item.id}
-                                            onClick={()=>handleChooseAttribute(atr,item)}
-                                            className={chooseAttributes.length
-                                                ?chooseAttributes.map(color=>{
-                                                    if(color.value===item.value){
-                                                        return 'activeSomeParametrs'
-                                                    }
-                                                })
-                                                :''}>
-                                            <span style={{letterSpacing:'0.05em',fontFamily:'var(--sspro)'}}>
-                                                  <span>{item.value}</span>
-                                            </span>
-                                          </BoxAtribute>) 
-                                    ))
-                                }
-                                </BoxItems>
-                             </Parameters>))}
+                            (<Parameters 
+                                key={atr.id}
+                                chooseAttributes={chooseAttributes}
+                                atr={atr}
+                                handleChooseAttribute={handleChooseAttribute}
+                                />))}
                              <p style={{fontSize:'18px',fontWeight:'var(--fw-bold)',margin:'38px 0 10px',fontFamily:'var(--roboto)'}}>PRICE:</p>
                             {
                         infoProduct?.prices.map(price=>(
