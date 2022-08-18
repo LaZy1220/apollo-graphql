@@ -52,8 +52,8 @@ export const Parameters = ({
                                             id={item.id}
                                             onClick={()=>handleChooseAttribute(atr,item)}
                                             className={chooseAttributes.length
-                                                ?chooseAttributes.map(color=>{
-                                                    if(color.value===item.value){
+                                                ?chooseAttributes.map(atributte=>{
+                                                    if(atributte.value===item.value&&atributte.label===atr.name){
                                                         return 'activeSomeParametrs'
                                                     }
                                                 })
