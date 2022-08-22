@@ -14,10 +14,10 @@ export const HomePage =({
     currentCategory,
     currentCurrency,
 })=>{
-    const ucFirt = (str) => str[0].toUpperCase()+str.slice(1);
+    const ucFirst = (str) => str[0].toUpperCase()+str.slice(1);
     return(
         <>
-            <CategoryTitle>{ucFirt(currentCategory)}</CategoryTitle>
+            <CategoryTitle>{ucFirst(currentCategory)}</CategoryTitle>
             <GoodsList 
                 currentCategory={currentCategory}
                 currentCurrency={currentCurrency}

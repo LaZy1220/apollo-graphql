@@ -46,18 +46,20 @@ const AddCartButton = styled.div`
     cursor: pointer;
 `
 export const ProductPage = ({
-    infoProduct,
-    setInfoProduct,
     currentCurrency,
+    addOrder
 })=>{ 
     const [currentImg,setCurrentImg] = useState(0)
     const [chooseAttributes,setChooseAtributes]=useState([])
+    const [infoProduct,setInfoProduct]=useState([])
     const {id}  = useParams()
     const {data,loading,error}=useQuery(GET_INFO_PRODUCTS,{
         variables:{
           id:id
         }
       })
+    const atrProductQuantity = infoProduct?.attributes?.length
+    const chooseAtrProductQuantity = chooseAttributes.length
     const handleSwitchImg=(id)=>{
         setCurrentImg(id)
     }
@@ -123,7 +125,7 @@ export const ProductPage = ({
                             &&<p key={price.amount} style={{fontFamily:'var(--family)',fontWeight:'var(--fw-bold)',fontSize:'24px'}}>{currentCurrency.symbol}{price.amount}</p>
                           ))
                         }
-                        <AddCartButton>ADD TO CART</AddCartButton>
+                        <AddCartButton onClick={()=>addOrder(infoProduct, chooseAttributes,atrProductQuantity, chooseAtrProductQuantity)}>ADD TO CART</AddCartButton>
                         <div style={{fontFamily:'var(--roboto)'}} dangerouslySetInnerHTML={{__html:infoProduct?.description}}></div>
                     </Info>
                 </Details>
