@@ -33,6 +33,7 @@ export const Header = ({
     setCurrentCurrency,
     currentCurrency,
     isHide,
+    orderCounter,
     })=>{
         const navigate = useNavigate()
     return(
@@ -51,7 +52,9 @@ export const Header = ({
                             currentCurrency={currentCurrency}
                             isHide={isHide}
                         />
-                        <Cart onClick={()=>navigate('/cart')}/>
+                        <Cart 
+                            onClick={()=>navigate('/cart')}
+                            orderCounter={orderCounter}/>
                     </Select>
                 </Wrapper>
         </HeaderEl>

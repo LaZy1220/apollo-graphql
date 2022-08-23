@@ -10,22 +10,26 @@ const Quantity = styled.span`
     top:15px;
     width: 20px;
     height: 20px;
+    font-size: 14px;
+    font-weight: var(--fw-bold);
+    font-family: var(--roboto);
     background-color: var(--black);
     border-radius: 50%;
     color: white;
+    line-height: 20px;
     display: flex;
     justify-content: center;
     text-align: center;
 `
 
-export const Cart = ({quantity=1})=>{
+export const Cart = ({orderCounter})=>{
     return(
         <Wrapper>
-            <img style={{width:'20px',height:'18px'}} src="/images/Cart.svg"/>
+            <img style={{width:'20px',height:'18px'}} src="/images/Cart.svg" alt="cart"/>
             {
-                quantity===0
+                orderCounter===0
                 ?''
-                :<Quantity>{quantity}</Quantity>
+                :<Quantity>{orderCounter}</Quantity>
 
             }
         </Wrapper>

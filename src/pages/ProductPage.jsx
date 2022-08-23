@@ -99,7 +99,7 @@ export const ProductPage = ({
                 :<Details>
                     <ProductImgs>
                         {
-                            infoProduct?.gallery.map((item,index)=>(
+                            infoProduct?.gallery?.map((item,index)=>(
                                 <Img 
                                 key={index} 
                                 src={item}  
@@ -111,7 +111,7 @@ export const ProductPage = ({
                     <Info>
                         <ProductTitle>{infoProduct?.name}</ProductTitle>
                         <ProductBrend>{infoProduct?.brand}</ProductBrend>
-                        {infoProduct?.attributes.map(atr=>
+                        {infoProduct?.attributes?.map(atr=>
                             (<Parameters 
                                 key={atr.id}
                                 chooseAttributes={chooseAttributes}
@@ -120,7 +120,7 @@ export const ProductPage = ({
                                 />))}
                              <p style={{fontSize:'18px',fontWeight:'var(--fw-bold)',margin:'38px 0 10px',fontFamily:'var(--roboto)'}}>PRICE:</p>
                             {
-                        infoProduct?.prices.map(price=>(
+                        infoProduct?.prices?.map(price=>(
                             price.currency.symbol===currentCurrency.symbol
                             &&<p key={price.amount} style={{fontFamily:'var(--family)',fontWeight:'var(--fw-bold)',fontSize:'24px'}}>{currentCurrency.symbol}{price.amount}</p>
                           ))
