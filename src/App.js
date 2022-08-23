@@ -17,13 +17,30 @@ function App() {
   }
   const addOrder = (item,chooseItemAttribute,itemAttribute,counterItemAttribute)=>{
     if(itemAttribute===counterItemAttribute){
-        const newItem ={
-          quantity:1,
-          chooseItemAttribute:[...chooseItemAttribute],
-          ...item
+        const itemIndex = order.findIndex(orderItem=>{return JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)})
+        if(itemIndex<0){
+          const newItem ={
+            quantity:1,
+            chooseItemAttribute:[...chooseItemAttribute],
+            ...item
+          }
+          setOrder([...order,newItem])
+        }
+        else{
+          const newOrder = order.map((orderItem,index)=>{
+              if(itemIndex ===index && JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)){
+                  return{
+                      ...orderItem,
+                      quantity:orderItem.quantity+1
+                  }
+              }
+              else{
+                  return orderItem
+              }
+          })
+          setOrder(newOrder)
         }
         incrementOrderCounter()
-        setOrder([...order,newItem])
     }
     else{
       alert('Select product attributes')
