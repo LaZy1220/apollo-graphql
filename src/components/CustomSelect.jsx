@@ -21,6 +21,8 @@ const Options = styled.ul`
     box-sizing: border-box;
     top:65px;
     right:78px;
+    z-index: 20;
+    background-color: #ffff;
     box-shadow:var(--shadow);
 `
 const Currency = styled.li`
@@ -47,8 +49,8 @@ export const CustomSelect=({
                     {currentCurrency.symbol}
                     {
                        isHide
-                       ?<IconSelect title="select" src='images/icons/Arrow.svg'/>
-                       :<IconSelect title="select" src='images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/> 
+                       ?<IconSelect title="select" src='/images/icons/Arrow.svg'/>
+                       :<IconSelect title="select" src='/images/icons/Arrow.svg' style={{transform:'rotate(180deg)'}}/> 
                     }
                 </SelectEl>
                 {isHide?

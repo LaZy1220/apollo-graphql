@@ -10,7 +10,7 @@ const Quantity = styled.span`
     top:15px;
     width: 20px;
     height: 20px;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: var(--fw-bold);
     font-family: var(--roboto);
     background-color: var(--black);
@@ -25,7 +25,7 @@ const Quantity = styled.span`
 export const Cart = ({orderCounter})=>{
     return(
         <Wrapper>
-            <img style={{width:'20px',height:'18px'}} src="/images/Cart.svg" alt="cart"/>
+            <img style={{width:'20px',height:'18px'}} src="/images/Cart-black.svg" alt="cart"/>
             {
                 orderCounter===0
                 ?''

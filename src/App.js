@@ -15,9 +15,9 @@ function App() {
   const incrementOrderCounter = ()=>{
     setOrderCounter(orderCounter+1)
   }
-  const addOrder = (item,chooseItemAttribute,itemAttribute,counterItemAttribute)=>{
+  const addOrder = (item,chooseItemAttribute=[{label:'someAttribute',value:'none'}],itemAttribute=0,counterItemAttribute=0)=>{
     if(itemAttribute===counterItemAttribute){
-        const itemIndex = order.findIndex(orderItem=>{return JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)})
+        const itemIndex = order.findIndex(orderItem=>{return item.id===orderItem.id && JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)})
         if(itemIndex<0){
           const newItem ={
             quantity:1,
@@ -28,7 +28,7 @@ function App() {
         }
         else{
           const newOrder = order.map((orderItem,index)=>{
-              if(itemIndex ===index && JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)){
+              if(itemIndex === index && JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)){
                   return{
                       ...orderItem,
                       quantity:orderItem.quantity+1
@@ -69,11 +69,17 @@ function App() {
           orderCounter={orderCounter}
         />
         <Routes>
-          <Route path='/' element={<HomePage currentCategory={currentCategory}  currentCurrency={currentCurrency}/>}/>
-          <Route path='/product/:id' 
-          element={<ProductPage 
-            currentCurrency={currentCurrency}
-            addOrder={addOrder}/>}/>
+          <Route 
+            path='/' 
+            element={<HomePage 
+              currentCategory={currentCategory}  
+              currentCurrency={currentCurrency}
+              addOrder={addOrder}/>}/>
+          <Route 
+            path='/product/:id' 
+            element={<ProductPage 
+              currentCurrency={currentCurrency}
+              addOrder={addOrder}/>}/>
           <Route path='/cart' element={<CartPage/>}/>
         </Routes>
       </Conteinter>

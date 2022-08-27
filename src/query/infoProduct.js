@@ -6,8 +6,8 @@ query getInfoProduct($id:String!){
     name 
     gallery 
     id 
-    description 
-    category 
+    description
+    inStock 
     prices{currency{symbol}amount} 
     brand
     attributes{items{displayValue id value} id name type}

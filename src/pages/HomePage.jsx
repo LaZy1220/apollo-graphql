@@ -13,6 +13,7 @@ const CategoryTitle = styled.p`
 export const HomePage =({
     currentCategory,
     currentCurrency,
+    addOrder,
 })=>{
     const ucFirst = (str) => str[0].toUpperCase()+str.slice(1);
     return(
@@ -21,6 +22,7 @@ export const HomePage =({
             <GoodsList 
                 currentCategory={currentCategory}
                 currentCurrency={currentCurrency}
+                addOrder={addOrder}
             />
         </>
     )

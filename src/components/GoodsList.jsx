@@ -4,7 +4,7 @@ import { GET_PRODUCTS } from "../query/products";
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom'
 
-const GoodsLostEl = styled.div`
+const GoodsListEl = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(336px,1fr));
   grid-gap:40px;
@@ -13,10 +13,11 @@ const GoodsLostEl = styled.div`
 const Card = styled.div`
   cursor: pointer;
   margin-top: 60px;
-  &:hover{box-shadow:var(--shadow)};
-`
-const CardBody = styled.div`
   padding: 16px;
+  position: relative;
+  &:hover{
+    box-shadow:var(--shadow);
+    .card-button{display:flex}};
 `
 const ImgWrapper = styled.div`
   position: relative;
@@ -38,10 +39,23 @@ const OutStockImg = styled.div`
   width: 100%;
   height: 338px;
 `
+const ButtonAddCart = styled.div`
+  width: 52px;
+  height: 52px;
+  background: #5ECE7B;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 55px;
+  right: 31px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+`
 
 export const GoodsList = ({
   currentCategory,
-  currentCurrency
+  currentCurrency,
+  addOrder,
 })=>{
   const [currentProducts,setCurrentProducts]=useState([])
   const navigate = useNavigate()
@@ -54,7 +68,7 @@ export const GoodsList = ({
     setCurrentProducts(data?.category?.products)
   },[data])
     return(
-        <GoodsLostEl>
+        <GoodsListEl>
             {
               error&&<h3>Sorry, we have a problem, try again</h3>
             }
@@ -62,8 +76,9 @@ export const GoodsList = ({
                 loading
                 ?<h1>Loading...</h1>
                 :currentProducts?.map(item=>(
-                    <Card key={item.id} onClick={()=>navigate(`/product/${item.id}`)}>
-                      <CardBody>
+                    <Card 
+                      key={item.id}
+                      onClick={()=>navigate(`/product/${item.id}`)}>
                         {
                           item.inStock
                           ?<GoodsImg src={item.gallery[0]}/>
@@ -81,10 +96,16 @@ export const GoodsList = ({
                             &&<GoodsPrice key={price.amount}><span style={{fontFamily:'var(--raleway)',fontWeight:'var(--fw-hard)'}}>{currentCurrency.symbol}{price.amount}</span></GoodsPrice>
                           ))
                         }
-                      </CardBody>
+                        <ButtonAddCart 
+                          className="card-button"
+                          onClick={(event)=>{
+                            event.stopPropagation()
+                            addOrder(item)}}>
+                          <img style={{width:'24px',heigth:'24px'}} src="/images/Cart-white.svg" alt="cart" />
+                        </ButtonAddCart>
                     </Card>
-                ))
-            }
-        </GoodsLostEl>    
+                ))               
+            }           
+        </GoodsListEl>    
     )
 }
