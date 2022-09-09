@@ -16,6 +16,7 @@ function App() {
     setOrderCounter(orderCounter+1)
   }
   const addOrder = (item,chooseItemAttribute=[{label:'someAttribute',value:'none'}],itemAttribute=0,counterItemAttribute=0)=>{
+    if(item.inStock===false){return alert('Sorry, product out of stock')}
     if(itemAttribute===counterItemAttribute){
         const itemIndex = order.findIndex(orderItem=>{return item.id===orderItem.id && JSON.stringify(orderItem.chooseItemAttribute)===JSON.stringify(chooseItemAttribute)})
         if(itemIndex<0){

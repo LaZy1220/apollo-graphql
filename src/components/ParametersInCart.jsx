@@ -1,23 +1,25 @@
+//I couldn't think of anything better)
+
 import styled from "styled-components"
 
 const BoxItems = styled.div`
     display:flex;
-    gap:12px;
+    gap:8px;
 `
 const ColorBox = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-    height: 32px;
-    width: 32px;
+    height: 16px;
+    width: 16px;
     cursor: pointer;
 `
 const BoxAtribute = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-    height: 45px;
-    width: 63px;
+    height: 24px;
+    width: 24px;
     border:1px solid var(--black);
     cursor: pointer;
 `
