@@ -2,22 +2,17 @@ import styled from "styled-components"
 
 const BoxItems = styled.div`
     display:flex;
-    gap:12px;
 `
 const ColorBox = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-    height: 32px;
-    width: 32px;
     cursor: pointer;
 `
 const BoxAtribute = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-    height: 45px;
-    width: 63px;
     border:1px solid var(--black);
     cursor: pointer;
 `
@@ -26,11 +21,15 @@ export const Parameters = ({
     chooseAttributes,
     atr,
     handleChooseAttribute,
+    ColorBoxSize,
+    SomeAttributeBoxHeight,
+    SomeAttributeBoxWidth,
+    ParametersBoxGap,
 }) =>{
     return(
         <>
         <span style={{padding:'24px 0 8px',fontSize:'18px',fontFamily:'var(--roboto)',fontWeight:'var(--fw-bold)',display:'block'}}>{(atr?.name).toUpperCase()}:</span>
-                                <BoxItems>
+                                <BoxItems style={{display:'flex', gap:`${ParametersBoxGap}px`}}>
                                 {
                                     atr.items.map((item)=>(
                                         atr.id==='Color'
@@ -48,12 +47,13 @@ export const Parameters = ({
                                             id={item.id} 
                                             key={item.id}
                                             onClick={()=>handleChooseAttribute(atr,item)}
-                                            style={{backgroundColor:`${item.value}`,border:`${item.value ==='#FFFFFF'?'1px solid var(--black)':'none'}`}}
+                                            style={{backgroundColor:`${item.value}`,border:`${item.value ==='#FFFFFF'?'1px solid var(--black)':'none'}`,width:`${ColorBoxSize}px`,height:`${ColorBoxSize}px`}}
                                             />                                           
                                         :(<BoxAtribute
                                             key={item.id}
                                             id={item.id}
                                             onClick={()=>handleChooseAttribute(atr,item)}
+                                            style={{width:`${SomeAttributeBoxWidth}px`,height:`${SomeAttributeBoxHeight}px`}}
                                             className={chooseAttributes.length
                                                 ?chooseAttributes.map(atributte=>{
                                                     if(atributte.value===item.value&&atributte.label===atr.name){

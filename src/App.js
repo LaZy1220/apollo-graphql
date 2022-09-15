@@ -5,6 +5,8 @@ import {Conteinter} from './components/Conteiner';
 import { HomePage } from './pages/HomePage';
 import {CartPage} from './pages/CartPage';
 import {ProductPage} from './pages/ProductPage'
+import { MiniCart } from './components/MiniCart';
+import { BackGround } from './components/BackGround';
 
 function App() {
   const [currentCategory,setCurrentCategory]=useState('all')
@@ -12,6 +14,7 @@ function App() {
   const [orderCounter,setOrderCounter]=useState(0)
   const [order,setOrder]=useState([])
   const [isHide,setIsHide] =useState(false)
+  const [isHideMiniCart,setIsHideMiniCart]=useState(false)
   const incrementOrderCounter = ()=>{
     setOrderCounter(orderCounter+1)
   }
@@ -50,7 +53,13 @@ function App() {
   const handleSwitchCategory = (name)=>{
     setCurrentCategory(name)  
   }
-  const showSelect =(event)=>{
+  const showModal =(event)=>{
+    if(event.target.title==='cart'){
+      setIsHideMiniCart(!isHideMiniCart)
+    }
+    else{
+      setIsHideMiniCart(false)
+    }
     if(event.target.title==='select'){
       setIsHide(!isHide)
     }
@@ -59,7 +68,8 @@ function App() {
     }
   }
     return (
-    <div className="App" onClick={showSelect}>
+    <div className="App" 
+      onClick={showModal}>
       <Conteinter>
         <Header 
           currentCategory={currentCategory} 
@@ -69,6 +79,8 @@ function App() {
           isHide={isHide}
           orderCounter={orderCounter}
         />
+        {isHideMiniCart && <><BackGround/><MiniCart orderCounter={orderCounter}/></>}
+       
         <Routes>
           <Route 
             path='/' 

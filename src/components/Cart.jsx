@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 const Wrapper = styled.div`
-    cursor: pointer;
     margin-left:22px;
 `
 const Quantity = styled.span`
@@ -25,7 +24,11 @@ const Quantity = styled.span`
 export const Cart = ({orderCounter})=>{
     return(
         <Wrapper>
-            <img style={{width:'20px',height:'18px'}} src="/images/Cart-black.svg" alt="cart"/>
+            <img 
+                style={{width:'20px',height:'18px',cursor:'pointer'}} 
+                src="/images/Cart-black.svg" 
+                alt="cart" 
+                title="cart"/>
             {
                 orderCounter===0
                 ?''
