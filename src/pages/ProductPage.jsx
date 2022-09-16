@@ -30,7 +30,8 @@ const ProductTitle = styled.div`
 `
 const ProductBrend = styled.div`
     font-size: 30px;
-    margin-top: 43px;
+    margin-top: 16px;
+    margin-bottom:43px;
 `
 const AddCartButton = styled.div`
     margin:20px 0 40px;
@@ -60,10 +61,6 @@ export const ProductPage = ({
       })
     const atrProductQuantity = infoProduct?.attributes?.length
     const chooseAtrProductQuantity = chooseAttributes.length
-    const ColorBoxSize = 32
-    const SomeAttributeBoxHeight = 45
-    const SomeAttributeBoxWidth = 63
-    const ParametersBoxGap = 12
     const handleSwitchImg=(id)=>{
         setCurrentImg(id)
     }
@@ -121,10 +118,6 @@ export const ProductPage = ({
                                 chooseAttributes={chooseAttributes}
                                 atr={atr}
                                 handleChooseAttribute={handleChooseAttribute}
-                                ColorBoxSize = {ColorBoxSize}
-                                SomeAttributeBoxHeight = {SomeAttributeBoxHeight}
-                                SomeAttributeBoxWidth = {SomeAttributeBoxWidth}
-                                ParametersBoxGap = {ParametersBoxGap}
                                 />))}
                              <p style={{fontSize:'18px',fontWeight:'var(--fw-bold)',margin:'38px 0 10px',fontFamily:'var(--roboto)'}}>PRICE:</p>
                             {

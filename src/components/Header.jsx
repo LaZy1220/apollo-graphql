@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {useNavigate} from "react-router-dom"
 import { CategoryItems } from "./CategoryItems";
 import { CustomSelect } from "./CustomSelect";
 import { Cart } from "./Cart";
+
 const HeaderEl = styled.div`
-    padding-top:28px;
+    padding:28px 101px 0 101px;
 `
 const Wrapper = styled.div`
     display:flex;
@@ -34,10 +34,10 @@ export const Header = ({
     currentCurrency,
     isHide,
     orderCounter,
+    closeModal,
     })=>{
-        const navigate = useNavigate()
     return(
-        <HeaderEl>
+        <HeaderEl onClick={()=>closeModal()}>
                 <Wrapper>
                     <CategoriesList>
                         <CategoryItems
@@ -53,7 +53,6 @@ export const Header = ({
                             isHide={isHide}
                         />
                         <Cart 
-                            onClick={()=>navigate('/cart')}
                             orderCounter={orderCounter}/>
                     </Select>
                 </Wrapper>

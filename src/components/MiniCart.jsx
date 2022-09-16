@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import {useNavigate} from "react-router-dom"
+import { MiniCartItem } from "./MiniCartItem"
 
 const MiniCartEl = styled.div`
     position: absolute;
@@ -10,12 +12,27 @@ const MiniCartEl = styled.div`
 `
 const Title = styled.h1`
     font-size:16px;
-    padding-bottom: 32px;
+    margin-bottom: 32px;
 `
-export const MiniCart =({orderCounter})=>{
+
+export const MiniCart =({
+    orderCounter,
+    order,
+    currentCurrency
+})=>{    
+    const navigate = useNavigate()
     return(
-        <MiniCartEl>
-            <Title>My Bag, {`${orderCounter}`} items</Title>
+        <MiniCartEl id="cart">
+            <Title>My Bag, <span style={{fontWeight:'var(--fw-hard)',}}>{`${orderCounter}`} items</span></Title>
+            {
+                order.map(item=>(
+                   <MiniCartItem
+                        key={item.name}
+                        order={item}
+                        currentCurrency={currentCurrency}
+                   />
+                ))
+            }
         </MiniCartEl>
     )
 }

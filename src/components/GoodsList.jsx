@@ -71,6 +71,7 @@ export const GoodsList = ({
         <GoodsListEl>
             {
               error&&<h3>Sorry, we have a problem, try again</h3>
+              
             }
             {
                 loading

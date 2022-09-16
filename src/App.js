@@ -53,12 +53,13 @@ function App() {
   const handleSwitchCategory = (name)=>{
     setCurrentCategory(name)  
   }
+  const closeModal = ()=>{
+    setIsHideMiniCart(false)
+  }
   const showModal =(event)=>{
+    event.stopPropagation()
     if(event.target.title==='cart'){
       setIsHideMiniCart(!isHideMiniCart)
-    }
-    else{
-      setIsHideMiniCart(false)
     }
     if(event.target.title==='select'){
       setIsHide(!isHide)
@@ -70,7 +71,6 @@ function App() {
     return (
     <div className="App" 
       onClick={showModal}>
-      <Conteinter>
         <Header 
           currentCategory={currentCategory} 
           handleSwitchCategory={handleSwitchCategory}
@@ -78,9 +78,18 @@ function App() {
           currentCurrency={currentCurrency}
           isHide={isHide}
           orderCounter={orderCounter}
-        />
-        {isHideMiniCart && <><BackGround/><MiniCart orderCounter={orderCounter}/></>}
-       
+          closeModal={closeModal}
+          />
+        <Conteinter>
+        {isHideMiniCart && 
+                <><BackGround 
+                    onClick={()=>closeModal()}/> 
+                <MiniCart 
+                    orderCounter={orderCounter}
+                    order={order}
+                    currentCurrency={currentCurrency}/>
+                </>
+        }
         <Routes>
           <Route 
             path='/' 
