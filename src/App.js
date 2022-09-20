@@ -87,7 +87,8 @@ function App() {
                 <MiniCart 
                     orderCounter={orderCounter}
                     order={order}
-                    currentCurrency={currentCurrency}/>
+                    currentCurrency={currentCurrency}
+                    setIsHideMiniCart={setIsHideMiniCart}/>
                 </>
         }
         <Routes>

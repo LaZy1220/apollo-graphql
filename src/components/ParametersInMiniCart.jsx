@@ -49,16 +49,14 @@ export const ParametersInMiniCart = ({
                                             id={item.id}
                                             className={chooseItemAttribute[0].value==='none'
                                                         ?index===0&&'activeSomeParametrs'
-                                                        :chooseItemAttribute.map(color=>{
-                                                            if(color.value===item.value){
+                                                        :chooseItemAttribute.map(atributte=>{
+                                                            if(atributte.value===item.value&&atributte.label===atr.name){
                                                                 return 'activeSomeParametrs'
                                                             }
                                                             else return ''
                                             })}
                                             style={{overflow:'hidden'}}>
-                                            <span style={{fontFamily:'var(--sspro)',fontSize:'10px'}}>
-                                                  <span>{item.value}</span>
-                                            </span>
+                                            <span style={{fontFamily:'var(--sspro)',fontSize:'10px'}}>{item.value}</span>
                                           </BoxAtribute>) 
                                     ))
                                 }
