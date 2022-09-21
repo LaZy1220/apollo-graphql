@@ -40,7 +40,9 @@ max-height: 196px;
 `
 export const MiniCartItem = ({
     order,
-    currentCurrency
+    currentCurrency,
+    incrementQuantity,
+    decrementQuantity,
 })=>{
     return(
         <MiniCartItemEl>
@@ -50,7 +52,7 @@ export const MiniCartItem = ({
                         {
                             order.prices.map(price=>(
                                 price.currency.symbol===currentCurrency.symbol
-                                &&<p key={price.amount} style={{paddingTop:'4px',fontWeight:'var(--fw-hard)',fontSize:'16px'}}>{currentCurrency.symbol}{price.amount*order.quantity}</p>
+                                &&<p key={price.amount} style={{paddingTop:'4px',fontWeight:'var(--fw-hard)',fontSize:'16px'}}>{currentCurrency.symbol}{Math.round(price.amount*order.quantity*100)/100}</p>
                             ))
                         }
                         {
@@ -65,9 +67,9 @@ export const MiniCartItem = ({
             </LeftCartElements>
             <RightCartElements>
                 <Quantity>
-                    <ButtonIncDec><img src='/images/icons/Plus.svg' alt="Plus"/></ButtonIncDec>
+                    <ButtonIncDec onClick={()=>incrementQuantity(order.id,order.chooseItemAttribute)}><img src='/images/icons/Plus.svg' alt="Plus"/></ButtonIncDec>
                     <span style={{fontSize:'16px',textAlign:'center'}}>{order.quantity}</span>    
-                    <ButtonIncDec><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
+                    <ButtonIncDec onClick={()=>decrementQuantity(order.id,order.chooseItemAttribute)}><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
                 </Quantity>
                 <OrderImg src={order.gallery[0]}/>
             </RightCartElements>

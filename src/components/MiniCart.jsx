@@ -47,6 +47,8 @@ export const MiniCart =({
     order,
     currentCurrency,
     setIsHideMiniCart,
+    incrementQuantity,
+    decrementQuantity,
 })=>{    
     const navigate = useNavigate()
     const openCartPage = ()=>{
@@ -57,11 +59,13 @@ export const MiniCart =({
         <MiniCartEl id="cart">
             <Title>My Bag, <span style={{fontWeight:'var(--fw-hard)',}}>{`${orderCounter}`} items</span></Title>
             {
-                order.map(item=>(
+                order.map((item,index)=>(
                    <MiniCartItem
-                        key={item.name}
+                        key={index}
                         order={item}
                         currentCurrency={currentCurrency}
+                        incrementQuantity={incrementQuantity}
+                        decrementQuantity={decrementQuantity}
                    />
                 ))
             }
