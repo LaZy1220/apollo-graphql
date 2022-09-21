@@ -58,6 +58,16 @@ function App() {
       alert('Select product attributes')
     }
   }
+  const totalPrice=order.reduce((sum,item)=>{
+    let itemPrice = 0
+    item.prices.map(price=>{
+        if(price.currency.symbol===currentCurrency.symbol){
+            itemPrice=price.amount
+        }
+        return 0
+    })
+    return sum+item.quantity*itemPrice
+},0)
   const incrementQuantity = (itemId,orderAttributes)=>{
     const newOrder = order.map(element=>{
         if(itemId===element.id&&JSON.stringify(orderAttributes)===JSON.stringify(element.chooseItemAttribute)){
@@ -130,7 +140,8 @@ const decrementQuantity = (itemId,orderAttributes)=>{
                     currentCurrency={currentCurrency}
                     setIsHideMiniCart={setIsHideMiniCart}
                     incrementQuantity={incrementQuantity}
-                    decrementQuantity={decrementQuantity}/>
+                    decrementQuantity={decrementQuantity}
+                    totalPrice={totalPrice}/>
                 </>
         }
         <Routes>
@@ -145,7 +156,15 @@ const decrementQuantity = (itemId,orderAttributes)=>{
             element={<ProductPage 
               currentCurrency={currentCurrency}
               addOrder={addOrder}/>}/>
-          <Route path='/cart' element={<CartPage/>}/>
+          <Route 
+            path='/cart' 
+            element={<CartPage
+              order={order}
+              currentCurrency={currentCurrency}
+              incrementQuantity={incrementQuantity}
+              decrementQuantity={decrementQuantity}
+              totalPrice={totalPrice}
+              orderCounter={orderCounter}/>}/>
         </Routes>
       </Conteinter>
     </div>

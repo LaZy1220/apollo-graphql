@@ -49,23 +49,13 @@ export const MiniCart =({
     setIsHideMiniCart,
     incrementQuantity,
     decrementQuantity,
+    totalPrice,
 })=>{
     const navigate = useNavigate()
     const openCartPage = ()=>{
         setIsHideMiniCart(false)
         navigate('/cart/')
     }
-    const totalPrice=order.reduce((sum,item)=>{
-        let itemPrice = 0
-        item.prices.map(price=>{
-            if(price.currency.symbol===currentCurrency.symbol){
-                itemPrice=price.amount
-            }
-            return 0
-        })
-        return sum+item.quantity*itemPrice
-    },0)
-    console.log(totalPrice);
     return(
         <MiniCartEl id="cart">
             <Title>My Bag, <span style={{fontWeight:'var(--fw-hard)',}}>{`${orderCounter}`} items</span></Title>

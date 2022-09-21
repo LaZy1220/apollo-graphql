@@ -21,7 +21,9 @@ const Quantity = styled.span`
     text-align: center;
 `
 
-export const Cart = ({orderCounter})=>{
+export const Cart = ({
+    orderCounter,
+})=>{
     return(
         <Wrapper>
             <img 
