@@ -49,12 +49,23 @@ export const MiniCart =({
     setIsHideMiniCart,
     incrementQuantity,
     decrementQuantity,
-})=>{    
+})=>{
     const navigate = useNavigate()
     const openCartPage = ()=>{
         setIsHideMiniCart(false)
         navigate('/cart/')
     }
+    const totalPrice=order.reduce((sum,item)=>{
+        let itemPrice = 0
+        item.prices.map(price=>{
+            if(price.currency.symbol===currentCurrency.symbol){
+                itemPrice=price.amount
+            }
+            return 0
+        })
+        return sum+item.quantity*itemPrice
+    },0)
+    console.log(totalPrice);
     return(
         <MiniCartEl id="cart">
             <Title>My Bag, <span style={{fontWeight:'var(--fw-hard)',}}>{`${orderCounter}`} items</span></Title>
@@ -71,7 +82,7 @@ export const MiniCart =({
             }
             <TotalPrice>
                 <span style={{fontSize:'16px',fontFamily:'var(--roboto)',fontWeight:'var(--fw-hard)'}}>Total</span>
-                <span style={{fontSize:'16px',fontWeight:'var(--fw-bold)'}}>200$</span>
+                <span style={{fontSize:'16px',fontWeight:'var(--fw-bold)'}}>{currentCurrency.symbol}{Math.round(totalPrice*100)/100}</span>  
             </TotalPrice>
             <Buttons>
                 <ButtonViewBag onClick={()=>openCartPage()}>View bag</ButtonViewBag>

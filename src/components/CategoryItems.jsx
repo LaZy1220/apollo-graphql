@@ -13,7 +13,7 @@ export const CategoryItems=({
 })=>{
     const {data,loading}=useQuery(GET_CATEGORIES)
     if(loading){
-        return ''
+        return console.log('loading...');
     }
     return(
         <>
