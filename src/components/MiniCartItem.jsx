@@ -51,7 +51,7 @@ export const MiniCartItem = ({
                         {
                             order.prices.map(price=>(
                                 price.currency.symbol===currentCurrency.symbol
-                                &&<p key={price.amount} style={{paddingTop:'4px',fontWeight:'var(--fw-hard)',fontSize:'16px'}}>{currentCurrency.symbol}{Math.round(price.amount*order.quantity*100)/100}</p>
+                                &&<p key={price.amount} style={{paddingTop:'4px',fontWeight:'var(--fw-hard)',fontSize:'16px'}}>{currentCurrency.symbol}{price.amount}</p>
                             ))
                         }
                         {

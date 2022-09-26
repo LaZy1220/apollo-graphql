@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { ParametersInCart } from "./ParametersInCart"
+import { useState } from "react"
 
 const CartItemEl = styled.div`
     padding:24px 0 32px 0;
@@ -43,13 +44,50 @@ const Quantity = styled.div`
     justify-content: space-between;
     height: 100%;
 `
-
+const SwitchImgEl = styled.div`
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    gap:8px;
+`
+const SwitchImg = styled.div`
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.73);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+const ImgWrapper = styled.div`
+    position: relative;
+`
 export const CartItem = ({
     item,
     currentCurrency,
     incrementQuantity,
     decrementQuantity,
 })=>{
+    const [currentImg,setCurrentImg]=useState(0)
+    const prevImg =()=>{
+        if(currentImg>0){
+            console.log(currentImg);
+            setCurrentImg(prev=>prev-1)
+        }
+        if(currentImg===0){
+            setCurrentImg(item.gallery.length-1)
+            console.log(currentImg);
+        }
+    }
+    const nextImg = ()=>{
+        if(currentImg<item.gallery.length-1){
+            setCurrentImg(prev=>prev+1)
+        }
+        if(currentImg===item.gallery.length-1){
+            setCurrentImg(0)
+        }
+    }
     return(
         <CartItemEl>
             <LeftCartElements>
@@ -58,7 +96,7 @@ export const CartItem = ({
                 {
                     item.prices.map(price=>(
                          price.currency.symbol===currentCurrency.symbol
-                         &&<p key={price.amount} style={{paddingTop:'4px',fontWeight:'var(--fw-bold)',fontSize:'24px',marginBottom:'20px'}}>{currentCurrency.symbol}{Math.round(price.amount*item.quantity*100)/100}</p>
+                         &&<p key={price.amount} style={{paddingTop:'4px',fontWeight:'var(--fw-bold)',fontSize:'24px',marginBottom:'20px'}}>{currentCurrency.symbol}{price.amount}</p>
                             ))
                 }
                 {
@@ -76,9 +114,18 @@ export const CartItem = ({
                     <span style={{fontSize:'24px',textAlign:'center',fontWeight:'var(--fw-hard)'}}>{item.quantity}</span>    
                     <ButtonIncDec onClick={()=>decrementQuantity(item.id,item.chooseItemAttribute)}><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
                 </Quantity>
-                <OrderImg src={item.gallery[0]}/>
+                <ImgWrapper>
+                    <OrderImg src={item.gallery[currentImg]}/>
+                    <SwitchImgEl>
+                        <SwitchImg onClick={()=>prevImg()}>
+                            <img style={{transform:'rotate(180deg)'}} src="/images/icons/ArrowRight.svg" alt="arrow left"/>
+                        </SwitchImg>
+                        <SwitchImg onClick={()=>nextImg()}>
+                            <img src="/images/icons/ArrowRight.svg" alt="arrow left"/>
+                        </SwitchImg>
+                    </SwitchImgEl>
+                </ImgWrapper>
             </RightCartElements>
-
         </CartItemEl>
     )
 }

@@ -88,6 +88,9 @@ const decrementQuantity = (itemId,orderAttributes)=>{
   const newOrder = order.map(element=>{
       if(itemId===element.id&&JSON.stringify(orderAttributes)===JSON.stringify(element.chooseItemAttribute)){
            const newQuantity=element.quantity-1
+           if(element.quantity>0){
+            decrementOrderCounter()
+           }
            return{
               ...element,
               quantity:newQuantity>=0?newQuantity:0
@@ -98,7 +101,6 @@ const decrementQuantity = (itemId,orderAttributes)=>{
       }
   })
   setOrder(newOrder)
-  decrementOrderCounter()
 }
   const handleSwitchCategory = (name)=>{
     setCurrentCategory(name)  
