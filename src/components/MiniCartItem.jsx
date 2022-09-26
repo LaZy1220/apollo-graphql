@@ -68,7 +68,7 @@ export const MiniCartItem = ({
                 <Quantity>
                     <ButtonIncDec onClick={()=>incrementQuantity(order.id,order.chooseItemAttribute)}><img src='/images/icons/Plus.svg' alt="Plus"/></ButtonIncDec>
                     <span style={{fontSize:'16px',textAlign:'center'}}>{order.quantity}</span>    
-                    <ButtonIncDec onClick={()=>decrementQuantity(order.id,order.chooseItemAttribute)}><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
+                    <ButtonIncDec onClick={()=>decrementQuantity(order.quantity,order.id,order.chooseItemAttribute)}><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
                 </Quantity>
                 <OrderImg src={order.gallery[0]}/>
             </RightCartElements>

@@ -110,9 +110,9 @@ export const CartItem = ({
             </LeftCartElements>
             <RightCartElements>
             <Quantity>
-                    <ButtonIncDec onClick={()=>incrementQuantity(item.id,item.chooseItemAttribute)}><img src='/images/icons/Plus.svg' alt="Plus"/></ButtonIncDec>
+                    <ButtonIncDec onClick={()=>incrementQuantity(item.quantity,item.id,item.chooseItemAttribute)}><img src='/images/icons/Plus.svg' alt="Plus"/></ButtonIncDec>
                     <span style={{fontSize:'24px',textAlign:'center',fontWeight:'var(--fw-hard)'}}>{item.quantity}</span>    
-                    <ButtonIncDec onClick={()=>decrementQuantity(item.id,item.chooseItemAttribute)}><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
+                    <ButtonIncDec onClick={()=>decrementQuantity(item.quantity,item.id,item.chooseItemAttribute)}><img src='/images/icons/Dash.svg' alt="Dash"/></ButtonIncDec>  
                 </Quantity>
                 <ImgWrapper>
                     <OrderImg src={item.gallery[currentImg]}/>

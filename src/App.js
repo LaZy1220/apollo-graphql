@@ -26,6 +26,9 @@ function App() {
       setOrderCounter(0)
     }
   }
+  const removeOrder = ()=>{
+    setOrder(order.filter(order=>order.quantity!==0))
+  }
   const addOrder = (item,chooseItemAttribute=[{label:'someAttribute',value:'none'}],itemAttribute=0,counterItemAttribute=0)=>{
     if(item.inStock===false){return alert('Sorry, product out of stock')}
     if(itemAttribute===counterItemAttribute){
@@ -84,23 +87,28 @@ function App() {
     setOrder(newOrder)
     incrementOrderCounter()
 }
-const decrementQuantity = (itemId,orderAttributes)=>{
-  const newOrder = order.map(element=>{
-      if(itemId===element.id&&JSON.stringify(orderAttributes)===JSON.stringify(element.chooseItemAttribute)){
-           const newQuantity=element.quantity-1
-           if(element.quantity>0){
-            decrementOrderCounter()
-           }
-           return{
-              ...element,
-              quantity:newQuantity>=0?newQuantity:0
-           }
-      }
-      else{
-          return element
-      }
-  })
-  setOrder(newOrder)
+const decrementQuantity = (quantity,itemId,orderAttributes)=>{
+  if(quantity>0){
+    const newOrder = order.map(element=>{
+        if(itemId===element.id&&JSON.stringify(orderAttributes)===JSON.stringify(element.chooseItemAttribute)){
+             const newQuantity=element.quantity-1
+             if(element.quantity>0){
+              decrementOrderCounter()
+             }
+             return{
+                ...element,
+                quantity:newQuantity>=0?newQuantity:0
+             }
+        }
+        else{
+            return element
+        }
+    })
+    setOrder(newOrder)
+  }
+  else{
+    removeOrder()
+  }
 }
   const handleSwitchCategory = (name)=>{
     setCurrentCategory(name)  
