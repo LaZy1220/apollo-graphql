@@ -63,7 +63,7 @@ export const CartPage = ({
                 <div>
                     <Numbers>{currentCurrency.symbol}{Math.round(totalPrice*21)/100}</Numbers>
                     <Numbers>{orderCounter}</Numbers>
-                    <Numbers>{currentCurrency.symbol}{totalPrice}</Numbers>
+                    <Numbers>{currentCurrency.symbol}{Math.round(totalPrice*100)/100}</Numbers>
                 </div>
             </FlexEl>           
             <ButtonOrder>Order</ButtonOrder>
